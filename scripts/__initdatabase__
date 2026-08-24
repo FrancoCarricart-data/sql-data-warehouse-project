@@ -1,0 +1,30 @@
+/* Script Purpouse : Creates a new database called DatawarehouseProject, if alredy exists it drops it
+and then creates a new one. Also creates the schemas for the bronze, silver and gold level. Warning:
+executing this script will drop the ENTIRE DATABASE*/
+
+
+
+USE master;
+GO
+
+-- Dropeando y creando DatawarehouseProject Data base
+IF EXISTS (SELECT 1 FROM sys.databases WHERE name = 'DataWarehouseProject')
+BEGIN
+	ALTER DATABASE DataWarehouseProject SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+	DROP DataWarehouseProject;
+END;
+GO
+
+-- Seleccionano y creando schemas
+CREATE DATABASE DataWarehouseProject;
+GO
+
+USE DataWarehouseProject;
+GO
+
+CREATE SCHEMA bronze;
+GO
+CREATE SCHEMA silver;
+GO
+CREATE SCHEMA gold;
+GO
